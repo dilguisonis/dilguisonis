@@ -8,7 +8,7 @@ function AsciiBar({ skill, delay }: { skill: Skill; delay: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
-  const totalBars = 20;
+  const totalBars = 15; // Reduced for mobile
   const filledBars = Math.round((skill.level / 100) * totalBars);
   const emptyBars = totalBars - filledBars;
 
@@ -18,12 +18,12 @@ function AsciiBar({ skill, delay }: { skill: Skill; delay: number }) {
       initial={{ opacity: 0, x: -10 }}
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.3, delay }}
-      className="font-mono text-sm"
+      className="font-mono text-xs sm:text-sm"
     >
-      <div className="flex items-center gap-4">
-        <span className="text-text-primary w-24 shrink-0">{skill.name}</span>
-        <span className="text-text-muted">[</span>
-        <div className="flex">
+      <div className="flex items-center gap-2 sm:gap-4">
+        <span className="text-text-primary w-20 sm:w-24 shrink-0 truncate">{skill.name}</span>
+        <span className="text-text-muted hidden sm:inline">[</span>
+        <div className="flex flex-1 sm:flex-none">
           {isInView && (
             <>
               {Array(filledBars)
@@ -49,7 +49,7 @@ function AsciiBar({ skill, delay }: { skill: Skill; delay: number }) {
             </>
           )}
         </div>
-        <span className="text-text-muted">]</span>
+        <span className="text-text-muted hidden sm:inline">]</span>
         <span className="text-text-secondary text-xs w-10 text-right">
           {skill.level}%
         </span>
@@ -68,11 +68,11 @@ function SkillCategory({
   baseDelay: number;
 }) {
   return (
-    <div className="space-y-3">
-      <h3 className="text-neon-amber font-bold text-sm uppercase tracking-wider">
+    <div className="space-y-2 sm:space-y-3">
+      <h3 className="text-neon-amber font-bold text-xs sm:text-sm uppercase tracking-wider">
         {title}:
       </h3>
-      <div className="space-y-2">
+      <div className="space-y-1.5 sm:space-y-2">
         {skills.map((skill, index) => (
           <AsciiBar
             key={skill.name}
@@ -95,23 +95,23 @@ export function Skills() {
   const areas = getSkillsByCategory("areas");
 
   return (
-    <section id="skills" className="py-24 px-4 bg-bg-secondary/30" ref={ref}>
+    <section id="skills" className="py-16 sm:py-24 px-4 bg-bg-secondary/30" ref={ref}>
       <div className="max-w-3xl mx-auto">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-12"
+          className="mb-8 sm:mb-12"
         >
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-xl sm:text-2xl font-bold">
             <span className="text-neon-cyan">&gt;</span> SKILLS
           </h2>
           <div className="h-px bg-gradient-to-r from-neon-cyan/50 to-transparent mt-2" />
         </motion.div>
 
-        {/* Skills grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* Skills grid - stack on mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
           <SkillCategory title="Languages" skills={languages} baseDelay={0} />
           <SkillCategory title="Frameworks" skills={frameworks} baseDelay={0.2} />
           <SkillCategory title="Tools" skills={tools} baseDelay={0.4} />

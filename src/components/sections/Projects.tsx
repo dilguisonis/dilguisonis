@@ -26,31 +26,31 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="terminal-box p-6 hover:border-neon-cyan/50 transition-colors group"
+      className="terminal-box p-4 sm:p-6 hover:border-neon-cyan/50 transition-colors group"
     >
       {/* Header */}
-      <div className="flex items-start justify-between mb-4">
-        <h3 className="text-lg font-bold text-text-primary group-hover:text-neon-cyan transition-colors">
+      <div className="flex items-start justify-between mb-3 sm:mb-4 gap-2">
+        <h3 className="text-base sm:text-lg font-bold text-text-primary group-hover:text-neon-cyan transition-colors">
           {project.name}
         </h3>
         <span
-          className={`text-xs font-mono ${statusColors[project.status]} opacity-80`}
+          className={`text-[10px] sm:text-xs font-mono ${statusColors[project.status]} opacity-80 shrink-0`}
         >
           [{statusLabels[project.status]}]
         </span>
       </div>
 
       {/* Description */}
-      <p className="text-text-secondary text-sm mb-4 leading-relaxed">
+      <p className="text-text-secondary text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">
         {project.description}
       </p>
 
       {/* Tags */}
-      <div className="flex flex-wrap gap-2 mb-4">
+      <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="text-xs px-2 py-1 bg-bg-tertiary text-text-muted border border-text-muted/20 rounded"
+            className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 bg-bg-tertiary text-text-muted border border-text-muted/20 rounded"
           >
             {tag}
           </span>
@@ -89,23 +89,23 @@ export function Projects() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="projects" className="py-24 px-4" ref={ref}>
+    <section id="projects" className="py-16 sm:py-24 px-4" ref={ref}>
       <div className="max-w-4xl mx-auto">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-12"
+          className="mb-8 sm:mb-12"
         >
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-xl sm:text-2xl font-bold">
             <span className="text-neon-cyan">&gt;</span> PROJECTS
           </h2>
           <div className="h-px bg-gradient-to-r from-neon-cyan/50 to-transparent mt-2" />
         </motion.div>
 
-        {/* Projects grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* Projects grid - single column on mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
