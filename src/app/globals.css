@@ -1,26 +1,244 @@
+/* JetBrains Mono font import */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core palette - Retro-futuristic terminal */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #0f0f18;
+  --bg-tertiary: #141420;
+
+  --text-primary: #e0e0e0;
+  --text-secondary: #8a8a9a;
+  --text-muted: #4a4a5a;
+
+  /* Neon accents */
+  --neon-cyan: #00fff5;
+  --neon-magenta: #ff00ff;
+  --neon-amber: #ffb000;
+  --neon-green: #00ff41;
+
+  /* Glow variants (subtle) */
+  --glow-cyan: rgba(0, 255, 245, 0.15);
+  --glow-magenta: rgba(255, 0, 255, 0.15);
+  --glow-amber: rgba(255, 176, 0, 0.15);
+  --glow-green: rgba(0, 255, 65, 0.15);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-neon-cyan: var(--neon-cyan);
+  --color-neon-magenta: var(--neon-magenta);
+  --color-neon-amber: var(--neon-amber);
+  --color-neon-green: var(--neon-green);
+  --color-glow-cyan: var(--glow-cyan);
+  --color-glow-magenta: var(--glow-magenta);
+  --color-glow-amber: var(--glow-amber);
+  --color-glow-green: var(--glow-green);
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Selection */
+::selection {
+  background: var(--glow-cyan);
+  color: var(--neon-cyan);
+}
+
+/* Cursor blink animation */
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: cursor-blink 1s infinite;
+}
+
+/* Scanline effect - very subtle */
+.scanlines {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.02) 0px,
+    rgba(0, 0, 0, 0.02) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+/* CRT flicker - extremely subtle */
+@keyframes crt-flicker {
+  0% { opacity: 0.99; }
+  50% { opacity: 1; }
+  100% { opacity: 0.99; }
+}
+
+.crt-flicker {
+  animation: crt-flicker 0.15s infinite;
+}
+
+/* Neon glow effect */
+.neon-glow-cyan {
+  text-shadow:
+    0 0 5px var(--glow-cyan),
+    0 0 10px var(--glow-cyan),
+    0 0 20px var(--glow-cyan);
+}
+
+.neon-glow-magenta {
+  text-shadow:
+    0 0 5px var(--glow-magenta),
+    0 0 10px var(--glow-magenta),
+    0 0 20px var(--glow-magenta);
+}
+
+.neon-glow-green {
+  text-shadow:
+    0 0 5px var(--glow-green),
+    0 0 10px var(--glow-green),
+    0 0 20px var(--glow-green);
+}
+
+.neon-glow-amber {
+  text-shadow:
+    0 0 5px var(--glow-amber),
+    0 0 10px var(--glow-amber),
+    0 0 20px var(--glow-amber);
+}
+
+/* Terminal box styles */
+.terminal-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--text-muted);
+  border-radius: 4px;
+  position: relative;
+}
+
+.terminal-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--neon-cyan),
+    transparent
+  );
+  opacity: 0.3;
+}
+
+/* ASCII bar animation */
+@keyframes ascii-fill {
+  from { width: 0; }
+  to { width: var(--fill-width); }
+}
+
+.ascii-bar-fill {
+  animation: ascii-fill 1s ease-out forwards;
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+/* Boot sequence */
+@keyframes boot-line {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.boot-line {
+  animation: boot-line 0.3s ease-out forwards;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .scanlines,
+  .crt-flicker {
+    display: none;
+  }
+}
+
+/* Mobile: disable heavy effects */
+@media (max-width: 768px) {
+  .scanlines {
+    display: none;
+  }
 }
