@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface UseTypewriterOptions {
   text: string;
@@ -20,60 +20,60 @@ export function useTypewriter({
   const [displayedText, setDisplayedText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const onCompleteRef = useRef(onComplete);
-  const hasStartedRef = useRef<string | null>(null);
 
-  // Keep onComplete ref updated
+  // Use refs to avoid re-triggering effects
+  const onCompleteRef = useRef(onComplete);
+  const completedRef = useRef(false);
+
   onCompleteRef.current = onComplete;
 
-  const getTypingSpeed = useCallback(() => {
-    if (!variableSpeed) return speed;
-    // Variable speed for more natural typing feel
-    const variance = speed * 0.5;
-    return speed + Math.random() * variance - variance / 2;
-  }, [speed, variableSpeed]);
-
   useEffect(() => {
-    // Prevent re-running if already completed for this text
-    if (hasStartedRef.current === text) return;
-    hasStartedRef.current = text;
+    // Reset if text changes
+    completedRef.current = false;
+    setDisplayedText("");
+    setIsComplete(false);
 
-    let timeout: NodeJS.Timeout;
-    let charIndex = 0;
-    let cancelled = false;
+    let timeoutId: NodeJS.Timeout;
+    let currentIndex = 0;
+    let isCancelled = false;
 
-    const startTyping = () => {
-      setIsTyping(true);
-
-      const typeChar = () => {
-        if (cancelled) return;
-        if (charIndex < text.length) {
-          setDisplayedText(text.slice(0, charIndex + 1));
-          charIndex++;
-          timeout = setTimeout(typeChar, getTypingSpeed());
-        } else {
-          setIsComplete(true);
-          setIsTyping(false);
-          onCompleteRef.current?.();
-        }
-      };
-
-      typeChar();
+    const getSpeed = () => {
+      if (!variableSpeed) return speed;
+      const variance = speed * 0.5;
+      return speed + Math.random() * variance - variance / 2;
     };
 
-    timeout = setTimeout(startTyping, delay);
+    const typeNextChar = () => {
+      if (isCancelled || completedRef.current) return;
+
+      if (currentIndex < text.length) {
+        currentIndex++;
+        setDisplayedText(text.slice(0, currentIndex));
+        setIsTyping(true);
+        timeoutId = setTimeout(typeNextChar, getSpeed());
+      } else {
+        setIsTyping(false);
+        setIsComplete(true);
+        completedRef.current = true;
+        onCompleteRef.current?.();
+      }
+    };
+
+    // Start after delay
+    timeoutId = setTimeout(typeNextChar, delay);
 
     return () => {
-      cancelled = true;
-      clearTimeout(timeout);
+      isCancelled = true;
+      clearTimeout(timeoutId);
     };
-  }, [text, speed, delay, getTypingSpeed]);
+  }, [text, speed, delay, variableSpeed]);
 
-  const reset = useCallback(() => {
+  const reset = () => {
+    completedRef.current = false;
     setDisplayedText("");
     setIsComplete(false);
     setIsTyping(false);
-  }, []);
+  };
 
   return {
     displayedText,

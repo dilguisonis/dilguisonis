@@ -79,7 +79,7 @@ export function Hero() {
                 transition={{ duration: 0.3 }}
               >
                 <Typewriter
-                  text="SOFTWARE_ENGINEER // BUENOS_AIRES"
+                  text="SOFTWARE_ENGINEER // CABA"
                   speed={40}
                   onComplete={() => setShowCTA(true)}
                   className="text-text-secondary text-sm sm:text-lg md:text-xl"
