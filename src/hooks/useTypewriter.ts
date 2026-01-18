@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 interface UseTypewriterOptions {
   text: string;
@@ -20,6 +20,11 @@ export function useTypewriter({
   const [displayedText, setDisplayedText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const onCompleteRef = useRef(onComplete);
+  const hasStartedRef = useRef(false);
+
+  // Keep onComplete ref updated
+  onCompleteRef.current = onComplete;
 
   const getTypingSpeed = useCallback(() => {
     if (!variableSpeed) return speed;
@@ -29,6 +34,10 @@ export function useTypewriter({
   }, [speed, variableSpeed]);
 
   useEffect(() => {
+    // Prevent re-running if already started
+    if (hasStartedRef.current) return;
+    hasStartedRef.current = true;
+
     let timeout: NodeJS.Timeout;
     let charIndex = 0;
 
@@ -43,7 +52,7 @@ export function useTypewriter({
         } else {
           setIsComplete(true);
           setIsTyping(false);
-          onComplete?.();
+          onCompleteRef.current?.();
         }
       };
 
@@ -55,7 +64,7 @@ export function useTypewriter({
     return () => {
       clearTimeout(timeout);
     };
-  }, [text, speed, delay, onComplete, getTypingSpeed]);
+  }, [text, speed, delay, getTypingSpeed]);
 
   const reset = useCallback(() => {
     setDisplayedText("");
