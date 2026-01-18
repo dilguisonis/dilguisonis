@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import Magnet from "@/components/reactbits/animations/Magnet";
 
 interface NeonButtonProps {
   children: ReactNode;
@@ -74,20 +75,24 @@ export function NeonButton({
 
   if (href) {
     return (
-      <a
-        href={href}
-        className={buttonClasses}
-        target={href.startsWith("http") ? "_blank" : undefined}
-        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-      >
-        {content}
-      </a>
+      <Magnet padding={60} magnetStrength={3}>
+        <a
+          href={href}
+          className={buttonClasses}
+          target={href.startsWith("http") ? "_blank" : undefined}
+          rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+        >
+          {content}
+        </a>
+      </Magnet>
     );
   }
 
   return (
-    <button onClick={onClick} className={buttonClasses}>
-      {content}
-    </button>
+    <Magnet padding={60} magnetStrength={3}>
+      <button onClick={onClick} className={buttonClasses}>
+        {content}
+      </button>
+    </Magnet>
   );
 }

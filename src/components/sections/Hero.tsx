@@ -5,6 +5,7 @@ import { InteractiveAvatar } from "@/components/ui/InteractiveAvatar";
 import { Typewriter } from "@/components/ui/Typewriter";
 import { NeonButton } from "@/components/ui/NeonButton";
 import { useState } from "react";
+import Particles from "@/components/reactbits/backgrounds/Particles";
 
 export function Hero() {
   const [showSubtitle, setShowSubtitle] = useState(false);
@@ -13,10 +14,26 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-[100dvh] flex flex-col items-center justify-center px-4 py-8 relative"
+      className="min-h-[100dvh] flex flex-col items-center justify-center px-4 py-8 relative overflow-hidden"
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-radial from-bg-secondary/50 via-bg-primary to-bg-primary pointer-events-none" />
+      {/* Particles background */}
+      <div className="absolute inset-0 z-0">
+        <Particles
+          particleCount={150}
+          particleSpread={12}
+          speed={0.08}
+          particleColors={['#00fff5', '#ff00ff', '#00ff41']}
+          particleBaseSize={80}
+          sizeRandomness={0.8}
+          cameraDistance={25}
+          alphaParticles={true}
+          moveParticlesOnHover={true}
+          particleHoverFactor={0.5}
+        />
+      </div>
+
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent via-bg-primary/30 to-bg-primary pointer-events-none z-[1]" />
 
       <div className="relative z-10 flex flex-col items-center gap-6 sm:gap-8 max-w-5xl mx-auto w-full">
         {/* Avatar - smaller on mobile */}

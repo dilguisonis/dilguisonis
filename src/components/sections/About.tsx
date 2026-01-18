@@ -25,22 +25,22 @@ PROFILE: DANILO_ILGUISONIS
 ================================`}
             </TerminalOutput>
             <TerminalOutput className="mt-4 text-text-primary text-xs sm:text-sm">
-              Software Engineer focused on AI
-              and production systems.
+              Software Engineer focused on building
+              and shipping production systems, with
+              experience in backend development,
+              automation, and AI-driven workflows.
             </TerminalOutput>
             <TerminalOutput className="mt-2 text-xs sm:text-sm">
               <span className="text-neon-amber">Education:</span>
               {`
-  B.Sc. Computer Science @ UBA
-  M.Sc. Computer Science @ UBA`}
+  M.Sc. Computer Science @ UBA (in progress)
+  Data Science @ UBA (intermediate degree)`}
             </TerminalOutput>
             <TerminalOutput className="mt-2 text-xs sm:text-sm">
-              <span className="text-neon-amber">Focus:</span>
+              <span className="text-neon-amber">Languages:</span>
               {`
-  - AI/ML Applications
-  - Full-Stack Development
-  - Distributed Systems
-  - Blockchain Technology`}
+  Spanish (Native)
+  English (C1)`}
             </TerminalOutput>
             <TerminalOutput className="mt-4 text-[10px] sm:text-sm">
               {`================================`}

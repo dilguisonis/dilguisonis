@@ -3,6 +3,9 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Terminal, TerminalLine, TerminalOutput } from "@/components/ui/Terminal";
+import DecryptedText from "@/components/reactbits/text/DecryptedText";
+import Aurora from "@/components/reactbits/backgrounds/Aurora";
+import { Logo } from "@/components/ui/Logo";
 
 const contactInfo = [
   { label: "EMAIL", value: "dilguisonis@gmail.com", href: "mailto:dilguisonis@gmail.com" },
@@ -15,8 +18,18 @@ export function Contact() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contact" className="py-16 sm:py-24 px-4 bg-bg-secondary/30" ref={ref}>
-      <div className="max-w-3xl mx-auto">
+    <section id="contact" className="py-16 sm:py-24 px-4 bg-bg-secondary/30 relative overflow-hidden" ref={ref}>
+      {/* Aurora background */}
+      <div className="absolute inset-0 z-0 opacity-30">
+        <Aurora
+          colorStops={['#00fff5', '#ff00ff', '#00fff5']}
+          amplitude={0.8}
+          blend={0.6}
+          speed={0.5}
+        />
+      </div>
+
+      <div className="max-w-3xl mx-auto relative z-10">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -25,7 +38,16 @@ export function Contact() {
           className="mb-8 sm:mb-12"
         >
           <h2 className="text-xl sm:text-2xl font-bold">
-            <span className="text-neon-cyan">&gt;</span> CONTACT
+            <span className="text-neon-cyan">&gt;</span>{" "}
+            <DecryptedText
+              text="CONTACT"
+              speed={40}
+              maxIterations={15}
+              animateOn="view"
+              characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789"
+              className="text-text-primary"
+              encryptedClassName="text-neon-cyan"
+            />
           </h2>
           <div className="h-px bg-gradient-to-r from-neon-cyan/50 to-transparent mt-2" />
         </motion.div>
@@ -81,6 +103,9 @@ export function Contact() {
           transition={{ duration: 0.5, delay: 1 }}
           className="mt-12 sm:mt-16 text-center text-text-muted text-xs sm:text-sm"
         >
+          <div className="flex justify-center mb-4">
+            <Logo size={40} animated={true} />
+          </div>
           <p>
             <span className="text-neon-cyan">&copy;</span> {new Date().getFullYear()} Danilo Ilguisonis
           </p>

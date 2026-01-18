@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { experiences } from "@/data/experience";
+import DecryptedText from "@/components/reactbits/text/DecryptedText";
 
 export function Experience() {
   const ref = useRef(null);
@@ -19,7 +20,16 @@ export function Experience() {
           className="mb-8 sm:mb-12"
         >
           <h2 className="text-xl sm:text-2xl font-bold">
-            <span className="text-neon-cyan">&gt;</span> EXPERIENCE
+            <span className="text-neon-cyan">&gt;</span>{" "}
+            <DecryptedText
+              text="EXPERIENCE"
+              speed={40}
+              maxIterations={15}
+              animateOn="view"
+              characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789"
+              className="text-text-primary"
+              encryptedClassName="text-neon-cyan"
+            />
           </h2>
           <div className="h-px bg-gradient-to-r from-neon-cyan/50 to-transparent mt-2" />
         </motion.div>

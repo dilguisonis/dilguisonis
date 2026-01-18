@@ -2,86 +2,57 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { getSkillsByCategory, Skill } from "@/data/skills";
+import { skillCategories, SkillCategory } from "@/data/skills";
+import DecryptedText from "@/components/reactbits/text/DecryptedText";
 
-function AsciiBar({ skill, delay }: { skill: Skill; delay: number }) {
+function SkillTag({ skill, delay }: { skill: string; delay: number }) {
+  return (
+    <motion.span
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3, delay }}
+      className="inline-block px-3 py-1.5 text-xs sm:text-sm font-mono
+                 border border-neon-cyan/40 text-text-primary
+                 bg-bg-primary/50 hover:bg-neon-cyan/10 hover:border-neon-cyan/60
+                 transition-colors duration-200 cursor-default"
+    >
+      {skill}
+    </motion.span>
+  );
+}
+
+function SkillCategorySection({
+  category,
+  baseDelay,
+}: {
+  category: SkillCategory;
+  baseDelay: number;
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-
-  const totalBars = 15; // Reduced for mobile
-  const filledBars = Math.round((skill.level / 100) * totalBars);
-  const emptyBars = totalBars - filledBars;
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, x: -10 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.3, delay }}
-      className="font-mono text-xs sm:text-sm"
+      initial={{ opacity: 0, y: 10 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.4, delay: baseDelay }}
+      className="space-y-3"
     >
-      <div className="flex items-center gap-2 sm:gap-4">
-        <span className="text-text-primary w-20 sm:w-24 shrink-0 truncate">{skill.name}</span>
-        <span className="text-text-muted hidden sm:inline">[</span>
-        <div className="flex flex-1 sm:flex-none">
-          {isInView && (
-            <>
-              {Array(filledBars)
-                .fill(null)
-                .map((_, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.02, delay: delay + i * 0.03 }}
-                    className="text-neon-green"
-                  >
-                    █
-                  </motion.span>
-                ))}
-              {Array(emptyBars)
-                .fill(null)
-                .map((_, i) => (
-                  <span key={i} className="text-text-muted/30">
-                    ░
-                  </span>
-                ))}
-            </>
-          )}
-        </div>
-        <span className="text-text-muted hidden sm:inline">]</span>
-        <span className="text-text-secondary text-xs w-10 text-right">
-          {skill.level}%
-        </span>
+      <h3 className="text-neon-amber font-bold text-xs sm:text-sm uppercase tracking-wider font-mono">
+        {">"} {category.title}
+      </h3>
+      <div className="flex flex-wrap gap-2">
+        {isInView &&
+          category.skills.map((skill, index) => (
+            <SkillTag
+              key={skill}
+              skill={skill}
+              delay={baseDelay + 0.1 + index * 0.05}
+            />
+          ))}
       </div>
     </motion.div>
-  );
-}
-
-function SkillCategory({
-  title,
-  skills,
-  baseDelay,
-}: {
-  title: string;
-  skills: Skill[];
-  baseDelay: number;
-}) {
-  return (
-    <div className="space-y-2 sm:space-y-3">
-      <h3 className="text-neon-amber font-bold text-xs sm:text-sm uppercase tracking-wider">
-        {title}:
-      </h3>
-      <div className="space-y-1.5 sm:space-y-2">
-        {skills.map((skill, index) => (
-          <AsciiBar
-            key={skill.name}
-            skill={skill}
-            delay={baseDelay + index * 0.05}
-          />
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -89,14 +60,9 @@ export function Skills() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const languages = getSkillsByCategory("languages");
-  const frameworks = getSkillsByCategory("frameworks");
-  const tools = getSkillsByCategory("tools");
-  const areas = getSkillsByCategory("areas");
-
   return (
     <section id="skills" className="py-16 sm:py-24 px-4 bg-bg-secondary/30" ref={ref}>
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -105,17 +71,29 @@ export function Skills() {
           className="mb-8 sm:mb-12"
         >
           <h2 className="text-xl sm:text-2xl font-bold">
-            <span className="text-neon-cyan">&gt;</span> SKILLS
+            <span className="text-neon-cyan">&gt;</span>{" "}
+            <DecryptedText
+              text="SKILLS"
+              speed={40}
+              maxIterations={15}
+              animateOn="view"
+              characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789"
+              className="text-text-primary"
+              encryptedClassName="text-neon-cyan"
+            />
           </h2>
           <div className="h-px bg-gradient-to-r from-neon-cyan/50 to-transparent mt-2" />
         </motion.div>
 
-        {/* Skills grid - stack on mobile */}
+        {/* Skills grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-          <SkillCategory title="Languages" skills={languages} baseDelay={0} />
-          <SkillCategory title="Frameworks" skills={frameworks} baseDelay={0.2} />
-          <SkillCategory title="Tools" skills={tools} baseDelay={0.4} />
-          <SkillCategory title="Areas" skills={areas} baseDelay={0.6} />
+          {skillCategories.map((category, index) => (
+            <SkillCategorySection
+              key={category.id}
+              category={category}
+              baseDelay={index * 0.1}
+            />
+          ))}
         </div>
       </div>
     </section>

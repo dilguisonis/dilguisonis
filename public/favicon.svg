@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background with subtle gradient -->
+  <rect width="32" height="32" rx="4" fill="#0a0a0f"/>
+
+  <!-- Circuit lines (decorative) -->
+  <path d="M4 8h4M4 24h4M28 8h-4M28 24h-4" stroke="#00fff5" stroke-width="0.5" opacity="0.3"/>
+  <circle cx="4" cy="8" r="1" fill="#00fff5" opacity="0.5"/>
+  <circle cx="4" cy="24" r="1" fill="#ff00ff" opacity="0.5"/>
+  <circle cx="28" cy="8" r="1" fill="#ff00ff" opacity="0.5"/>
+  <circle cx="28" cy="24" r="1" fill="#00fff5" opacity="0.5"/>
+
+  <!-- D letter - stylized with tech cut -->
+  <path d="M8 8h4c3.3 0 6 2.7 6 6v4c0 3.3-2.7 6-6 6H8V8z" stroke="#00fff5" stroke-width="2" fill="none">
+    <animate attributeName="stroke-opacity" values="1;0.7;1" dur="2s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Tech cut on D -->
+  <path d="M14 8l4 4" stroke="#0a0a0f" stroke-width="3"/>
+
+  <!-- I letter - minimalist with glow -->
+  <path d="M22 8v16" stroke="#ff00ff" stroke-width="2" stroke-linecap="round">
+    <animate attributeName="stroke-opacity" values="1;0.6;1" dur="1.5s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Top and bottom bars on I -->
+  <path d="M20 8h4M20 24h4" stroke="#ff00ff" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Glow effects (filters would be better but keeping it simple for favicon) -->
+  <path d="M8 8h4c3.3 0 6 2.7 6 6v4c0 3.3-2.7 6-6 6H8V8z" stroke="#00fff5" stroke-width="1" fill="none" opacity="0.3" transform="translate(0.5, 0.5)"/>
+  <path d="M22 8v16" stroke="#ff00ff" stroke-width="1" stroke-linecap="round" opacity="0.3" transform="translate(0.5, 0.5)"/>
+</svg>

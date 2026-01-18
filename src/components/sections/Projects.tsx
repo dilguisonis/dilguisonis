@@ -3,6 +3,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { projects, Project } from "@/data/projects";
+import DecryptedText from "@/components/reactbits/text/DecryptedText";
+import ShinyText from "@/components/reactbits/text/ShinyText";
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef(null);
@@ -30,8 +32,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     >
       {/* Header */}
       <div className="flex items-start justify-between mb-3 sm:mb-4 gap-2">
-        <h3 className="text-base sm:text-lg font-bold text-text-primary group-hover:text-neon-cyan transition-colors">
-          {project.name}
+        <h3 className="text-base sm:text-lg font-bold text-text-primary">
+          <ShinyText
+            text={project.name}
+            speed={3}
+            color="#e0e0e0"
+            shineColor="#00fff5"
+            className="group-hover:text-neon-cyan transition-colors"
+          />
         </h3>
         <span
           className={`text-[10px] sm:text-xs font-mono ${statusColors[project.status]} opacity-80 shrink-0`}
@@ -99,7 +107,16 @@ export function Projects() {
           className="mb-8 sm:mb-12"
         >
           <h2 className="text-xl sm:text-2xl font-bold">
-            <span className="text-neon-cyan">&gt;</span> PROJECTS
+            <span className="text-neon-cyan">&gt;</span>{" "}
+            <DecryptedText
+              text="PROJECTS"
+              speed={40}
+              maxIterations={15}
+              animateOn="view"
+              characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789"
+              className="text-text-primary"
+              encryptedClassName="text-neon-cyan"
+            />
           </h2>
           <div className="h-px bg-gradient-to-r from-neon-cyan/50 to-transparent mt-2" />
         </motion.div>

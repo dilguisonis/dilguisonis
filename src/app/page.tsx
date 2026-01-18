@@ -8,6 +8,7 @@ import { Experience } from "@/components/sections/Experience";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
 import { Contact } from "@/components/sections/Contact";
+import { Logo } from "@/components/ui/Logo";
 
 const navLinks = [
   { href: "#hero", label: "_home" },
@@ -28,8 +29,8 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-bg-primary/90 backdrop-blur-sm border-b border-text-muted/10">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo/Name - visible on mobile */}
-          <a href="#hero" className="text-neon-cyan font-mono text-sm md:hidden">
-            D_I
+          <a href="#hero" className="md:hidden">
+            <Logo size={28} animated={false} />
           </a>
 
           {/* Desktop navigation */}

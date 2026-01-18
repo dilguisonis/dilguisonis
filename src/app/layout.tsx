@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   description: "Software Engineer focused on AI and production systems. B.Sc. & M.Sc. Computer Science @ UBA",
   keywords: ["Software Engineer", "AI", "Full Stack", "TypeScript", "Python", "Buenos Aires"],
   authors: [{ name: "Danilo Ilguisonis" }],
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   openGraph: {
     title: "Danilo Ilguisonis | Software Engineer",
     description: "Software Engineer focused on AI and production systems",
