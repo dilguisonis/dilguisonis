@@ -21,7 +21,7 @@ export function useTypewriter({
   const [isComplete, setIsComplete] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const onCompleteRef = useRef(onComplete);
-  const hasStartedRef = useRef(false);
+  const hasStartedRef = useRef<string | null>(null);
 
   // Keep onComplete ref updated
   onCompleteRef.current = onComplete;
@@ -34,17 +34,19 @@ export function useTypewriter({
   }, [speed, variableSpeed]);
 
   useEffect(() => {
-    // Prevent re-running if already started
-    if (hasStartedRef.current) return;
-    hasStartedRef.current = true;
+    // Prevent re-running if already completed for this text
+    if (hasStartedRef.current === text) return;
+    hasStartedRef.current = text;
 
     let timeout: NodeJS.Timeout;
     let charIndex = 0;
+    let cancelled = false;
 
     const startTyping = () => {
       setIsTyping(true);
 
       const typeChar = () => {
+        if (cancelled) return;
         if (charIndex < text.length) {
           setDisplayedText(text.slice(0, charIndex + 1));
           charIndex++;
@@ -62,6 +64,7 @@ export function useTypewriter({
     timeout = setTimeout(startTyping, delay);
 
     return () => {
+      cancelled = true;
       clearTimeout(timeout);
     };
   }, [text, speed, delay, getTypingSpeed]);
