@@ -33,8 +33,8 @@ PROFILE: DANILO_ILGUISONIS
             <TerminalOutput className="mt-2 text-xs sm:text-sm">
               <span className="text-neon-amber">Education:</span>
               {`
-  M.Sc. Computer Science @ UBA (in progress)
-  Data Science @ UBA (intermediate degree)`}
+  Licentiate (B.Sc. + M.Sc.) Computer Science @ UBA (2022-2026)
+  B.Sc. Data Science @ UBA (2018-2022)`}
             </TerminalOutput>
             <TerminalOutput className="mt-2 text-xs sm:text-sm">
               <span className="text-neon-amber">Languages:</span>

@@ -8,7 +8,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "languages",
     title: "Languages",
-    skills: ["Python", "Rust", "Dart", "C#", "PHP", "TypeScript", "SQL"],
+    skills: ["Python", "Rust", "Dart", "C#", "PHP", "TypeScript", "SQL", "Java", "OpenGL"],
   },
   {
     id: "backend",
@@ -18,17 +18,17 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "ai",
     title: "AI & ML",
-    skills: ["Chatbots", "Prompt Engineering", "Fine-tuning", "NLP", "Image Generation"],
+    skills: ["Chatbots", "Prompt Engineering", "Fine-tuning", "NLP", "Image Generation", "ComfyUI", "scikit-learn", "PyTorch"],
   },
   {
     id: "automation",
     title: "Automation",
-    skills: ["RPA", "N8N", "Workflow Orchestration"],
+    skills: ["RPA", "N8N", "Workflow Orchestration", "Scraping"],
   },
   {
     id: "frontend",
     title: "Frontend",
-    skills: ["React", "Next.js", "Zustand"],
+    skills: ["React", "Next.js", "Zustand", "Flutter"],
   },
   {
     id: "scraping",
@@ -39,5 +39,10 @@ export const skillCategories: SkillCategory[] = [
     id: "cloud",
     title: "Cloud & Tools",
     skills: ["PostgreSQL", "Supabase", "Redis", "Vercel", "Linux", "VPS", "Git"],
+  },
+  {
+    id: "leadership",
+    title: "Leadership & Product",
+    skills: ["Team Management", "Technical Training", "Product Development", "UX Design & Testing", "Jira"],
   },
 ];
