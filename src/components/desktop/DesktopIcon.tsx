@@ -15,31 +15,34 @@ export function DesktopIcon({ windowId, label, icon, index }: DesktopIconProps) 
   const { openWindow } = useWindowManager();
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const dragStart = useRef({ x: 0, y: 0 });
+  const startClient = useRef({ x: 0, y: 0 });
   const isDragging = useRef(false);
-  const hasMoved = useRef(false);
 
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
     isDragging.current = true;
-    hasMoved.current = false;
     dragStart.current = { x: e.clientX - pos.x, y: e.clientY - pos.y };
+    startClient.current = { x: e.clientX, y: e.clientY };
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
   }, [pos]);
 
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
     if (!isDragging.current) return;
-    hasMoved.current = true;
     setPos({
       x: e.clientX - dragStart.current.x,
       y: e.clientY - dragStart.current.y,
     });
   }, []);
 
-  const handlePointerUp = useCallback(() => {
+  const handlePointerUp = useCallback((e: React.PointerEvent) => {
+    if (!isDragging.current) return;
     isDragging.current = false;
-  }, []);
-
-  const handleDoubleClick = useCallback(() => {
-    if (!hasMoved.current) openWindow(windowId);
+    const dx = e.clientX - startClient.current.x;
+    const dy = e.clientY - startClient.current.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    // If barely moved, it's a click — open the window
+    if (dist < 5) {
+      openWindow(windowId);
+    }
   }, [openWindow, windowId]);
 
   return (
@@ -51,9 +54,7 @@ export function DesktopIcon({ windowId, label, icon, index }: DesktopIconProps) 
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
-      onDoubleClick={handleDoubleClick}
-      onTouchEnd={() => openWindow(windowId)}
-      className="flex flex-col items-center gap-1 p-2 w-20 group cursor-grab active:cursor-grabbing select-none touch-none"
+      className="flex flex-col items-center gap-1 p-2 w-20 group cursor-pointer active:cursor-grabbing select-none touch-none"
     >
       <div className="text-3xl group-hover:scale-110 transition-transform">
         {icon}
