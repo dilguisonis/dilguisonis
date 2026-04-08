@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { Terminal, TerminalLine, TerminalOutput } from "@/components/ui/Terminal";
-import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 export function About() {

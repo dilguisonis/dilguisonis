@@ -23,14 +23,17 @@ export const experiences: ExperienceItem[] = [
     stack: ["Next.js", "TypeScript", "Supabase", "Redis", "ComfyUI", "Vercel"],
   },
   {
-    year: "2024",
-    company: "FREELANCE",
-    role: "Blockchain Developer",
+    year: "2026",
+    company: "WOMBI",
+    role: "Full-Stack Developer",
     items: [
-      "Bitcoin hot wallet (AQUA) customization",
-      "Flutter frontend, Rust core development",
+      "Core developer of UGC creator-brand marketplace platform",
+      "Built admin dashboard with refund system, balance management, and audit logging",
+      "Implemented campaign lifecycle, proposal workflows, and collaboration chat system",
+      "Integrated MercadoPago payments with balance/credit system",
+      "Fixed 164+ TypeScript errors achieving zero-error codebase",
     ],
-    stack: ["Flutter", "Dart", "Rust"],
+    stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Zustand", "Playwright"],
   },
   {
     year: "2024-Present",
@@ -44,5 +47,26 @@ export const experiences: ExperienceItem[] = [
       "Spearheaded frontend development with focus on UX design and testing",
     ],
     stack: ["Python", "SeleniumBase", "Machine Learning", "Web Development"],
+  },
+  {
+    year: "2026",
+    company: "TREVISAN MADERAS",
+    role: "Freelance Developer",
+    items: [
+      "Built landing page and CMS for wholesale wood distributor",
+      "Developed admin dashboard with AI background removal for product images",
+      "Implemented ISR with Supabase for dynamic content management",
+    ],
+    stack: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS"],
+  },
+  {
+    year: "2024",
+    company: "FREELANCE",
+    role: "Blockchain Developer",
+    items: [
+      "Bitcoin hot wallet (AQUA) customization",
+      "Flutter frontend, Rust core development",
+    ],
+    stack: ["Flutter", "Dart", "Rust"],
   },
 ];

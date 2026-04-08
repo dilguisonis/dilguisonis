@@ -15,9 +15,9 @@ export function Terminal({ children, title, className }: TerminalProps) {
       {/* Terminal header */}
       <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 border-b border-text-muted/30 bg-bg-tertiary/50">
         <div className="flex gap-1 sm:gap-1.5">
-          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#ff5f56] opacity-60" />
-          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#ffbd2e] opacity-60" />
-          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#27c93f] opacity-60" />
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-none bg-[#ff5f56] opacity-60" />
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-none bg-[#ffbd2e] opacity-60" />
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-none bg-[#27c93f] opacity-60" />
         </div>
         {title && (
           <span className="text-text-secondary text-[10px] sm:text-xs ml-2">{title}</span>

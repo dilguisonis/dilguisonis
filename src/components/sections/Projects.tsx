@@ -1,13 +1,13 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useState, useCallback } from "react";
+import { motion, useInView } from "motion/react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { projects, Project } from "@/data/projects";
 import DecryptedText from "@/components/reactbits/text/DecryptedText";
 import ShinyText from "@/components/reactbits/text/ShinyText";
 import Image from "next/image";
 
-function VideoWithImageFallback({ video, image, name }: { video: string; image: string; name: string }) {
+function VideoWithImageFallback({ video, image, name, isInView }: { video: string; image: string; name: string; isInView: boolean }) {
   const [showImage, setShowImage] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -22,12 +22,21 @@ function VideoWithImageFallback({ video, image, name }: { video: string; image: 
     }, 3000);
   }, []);
 
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isInView) {
+      videoRef.current.play();
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isInView]);
+
   return (
     <div className="relative aspect-video w-full">
       <video
         ref={videoRef}
         src={video}
-        autoPlay
+        preload="none"
         muted
         playsInline
         onEnded={handleVideoEnd}
@@ -43,6 +52,31 @@ function VideoWithImageFallback({ video, image, name }: { video: string; image: 
         />
       </div>
     </div>
+  );
+}
+
+function LazyVideo({ src, loop, isInView }: { src: string; loop?: boolean; isInView: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isInView) {
+      videoRef.current.play();
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isInView]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      preload="none"
+      loop={loop}
+      muted
+      playsInline
+      className="w-full aspect-video object-cover transition-all duration-300 group-hover:scale-105 group-hover:brightness-110"
+    />
   );
 }
 
@@ -63,26 +97,19 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   };
 
   const mediaWrapper = project.video && project.image ? (
-    <div className="relative mb-4 overflow-hidden rounded border border-text-muted/20 group-hover:border-neon-cyan/30 transition-all">
-      <VideoWithImageFallback video={project.video} image={project.image} name={project.name} />
+    <div className="relative mb-4 overflow-hidden border border-text-muted/20 group-hover:border-neon-cyan/30 transition-all">
+      <VideoWithImageFallback video={project.video} image={project.image} name={project.name} isInView={isInView} />
       <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-      <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,255,245,0)] group-hover:shadow-[inset_0_0_20px_rgba(0,255,245,0.15)] transition-shadow duration-300 pointer-events-none" />
+      <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(141,182,0,0)] group-hover:shadow-[inset_0_0_20px_rgba(141,182,0,0.10)] transition-shadow duration-300 pointer-events-none" />
     </div>
   ) : project.video ? (
-    <div className="relative mb-4 overflow-hidden rounded border border-text-muted/20 group-hover:border-neon-cyan/30 transition-all">
-      <video
-        src={project.video}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="w-full aspect-video object-cover transition-all duration-300 group-hover:scale-105 group-hover:brightness-110"
-      />
+    <div className="relative mb-4 overflow-hidden border border-text-muted/20 group-hover:border-neon-cyan/30 transition-all">
+      <LazyVideo src={project.video} loop isInView={isInView} />
       <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-      <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,255,245,0)] group-hover:shadow-[inset_0_0_20px_rgba(0,255,245,0.15)] transition-shadow duration-300 pointer-events-none" />
+      <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(141,182,0,0)] group-hover:shadow-[inset_0_0_20px_rgba(141,182,0,0.10)] transition-shadow duration-300 pointer-events-none" />
     </div>
   ) : project.image ? (
-    <div className="relative mb-4 overflow-hidden rounded border border-text-muted/20 group-hover:border-neon-cyan/30 transition-all">
+    <div className="relative mb-4 overflow-hidden border border-text-muted/20 group-hover:border-neon-cyan/30 transition-all">
       <div className="relative aspect-video w-full">
         <Image
           src={project.image}
@@ -93,7 +120,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,255,245,0)] group-hover:shadow-[inset_0_0_20px_rgba(0,255,245,0.15)] transition-shadow duration-300" />
+      <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(141,182,0,0)] group-hover:shadow-[inset_0_0_20px_rgba(141,182,0,0.10)] transition-shadow duration-300" />
     </div>
   ) : null;
 
@@ -121,7 +148,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             text={project.name}
             speed={3}
             color="#e0e0e0"
-            shineColor="#00fff5"
+            shineColor="#8db600"
             className="group-hover:text-neon-cyan transition-colors"
           />
         </h3>
@@ -145,7 +172,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 bg-bg-tertiary text-text-muted border border-text-muted/20 rounded"
+            className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 bg-bg-tertiary text-text-muted border border-text-muted/20"
           >
             {tag}
           </span>

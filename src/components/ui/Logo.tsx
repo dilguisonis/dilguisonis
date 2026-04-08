@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 interface LogoProps {
   size?: number;
@@ -22,7 +22,7 @@ export function Logo({ size = 32, animated = true, className = '' }: LogoProps) 
       transition={{ duration: 0.5 }}
     >
       {/* Background */}
-      <rect width="32" height="32" rx="4" fill="var(--bg-primary, #0a0a0f)" />
+      <rect width="32" height="32" rx="0" fill="var(--bg-primary, #1a2016)" />
 
       {/* Circuit lines */}
       <motion.g
@@ -30,17 +30,17 @@ export function Logo({ size = 32, animated = true, className = '' }: LogoProps) 
         animate={{ opacity: animated ? [0.3, 0.6, 0.3] : 0.3 }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <path d="M4 8h4M4 24h4M28 8h-4M28 24h-4" stroke="var(--neon-cyan, #00fff5)" strokeWidth="0.5" />
-        <circle cx="4" cy="8" r="1" fill="var(--neon-cyan, #00fff5)" opacity="0.5" />
-        <circle cx="4" cy="24" r="1" fill="var(--neon-magenta, #ff00ff)" opacity="0.5" />
-        <circle cx="28" cy="8" r="1" fill="var(--neon-magenta, #ff00ff)" opacity="0.5" />
-        <circle cx="28" cy="24" r="1" fill="var(--neon-cyan, #00fff5)" opacity="0.5" />
+        <path d="M4 8h4M4 24h4M28 8h-4M28 24h-4" stroke="var(--neon-cyan, #8db600)" strokeWidth="0.5" />
+        <circle cx="4" cy="8" r="1" fill="var(--neon-cyan, #8db600)" opacity="0.5" />
+        <circle cx="4" cy="24" r="1" fill="var(--neon-magenta, #5a7a32)" opacity="0.5" />
+        <circle cx="28" cy="8" r="1" fill="var(--neon-magenta, #5a7a32)" opacity="0.5" />
+        <circle cx="28" cy="24" r="1" fill="var(--neon-cyan, #8db600)" opacity="0.5" />
       </motion.g>
 
       {/* D letter */}
       <motion.path
         d="M8 8h4c3.3 0 6 2.7 6 6v4c0 3.3-2.7 6-6 6H8V8z"
-        stroke="var(--neon-cyan, #00fff5)"
+        stroke="var(--neon-cyan, #8db600)"
         strokeWidth="2"
         fill="none"
         initial={{ pathLength: 0 }}
@@ -52,7 +52,7 @@ export function Logo({ size = 32, animated = true, className = '' }: LogoProps) 
       />
 
       {/* Tech cut on D */}
-      <path d="M14 8l4 4" stroke="var(--bg-primary, #0a0a0f)" strokeWidth="3" />
+      <path d="M14 8l4 4" stroke="var(--bg-primary, #1a2016)" strokeWidth="3" />
 
       {/* I letter */}
       <motion.g
@@ -62,7 +62,7 @@ export function Logo({ size = 32, animated = true, className = '' }: LogoProps) 
       >
         <motion.path
           d="M22 8v16"
-          stroke="var(--neon-magenta, #ff00ff)"
+          stroke="var(--neon-magenta, #5a7a32)"
           strokeWidth="2"
           strokeLinecap="round"
           animate={{ strokeOpacity: animated ? [1, 0.6, 1] : 1 }}
@@ -70,7 +70,7 @@ export function Logo({ size = 32, animated = true, className = '' }: LogoProps) 
         />
         <path
           d="M20 8h4M20 24h4"
-          stroke="var(--neon-magenta, #ff00ff)"
+          stroke="var(--neon-magenta, #5a7a32)"
           strokeWidth="2"
           strokeLinecap="round"
         />
@@ -80,13 +80,13 @@ export function Logo({ size = 32, animated = true, className = '' }: LogoProps) 
       <g opacity="0.3" transform="translate(0.5, 0.5)">
         <path
           d="M8 8h4c3.3 0 6 2.7 6 6v4c0 3.3-2.7 6-6 6H8V8z"
-          stroke="var(--neon-cyan, #00fff5)"
+          stroke="var(--neon-cyan, #8db600)"
           strokeWidth="1"
           fill="none"
         />
         <path
           d="M22 8v16"
-          stroke="var(--neon-magenta, #ff00ff)"
+          stroke="var(--neon-magenta, #5a7a32)"
           strokeWidth="1"
           strokeLinecap="round"
         />

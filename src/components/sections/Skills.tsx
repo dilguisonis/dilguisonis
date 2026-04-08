@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { skillCategories, SkillCategory } from "@/data/skills";
 import DecryptedText from "@/components/reactbits/text/DecryptedText";

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { Terminal, TerminalLine, TerminalOutput } from "@/components/ui/Terminal";
 import DecryptedText from "@/components/reactbits/text/DecryptedText";
@@ -22,7 +22,7 @@ export function Contact() {
       {/* Aurora background */}
       <div className="absolute inset-0 z-0 opacity-30">
         <Aurora
-          colorStops={['#00fff5', '#ff00ff', '#00fff5']}
+          colorStops={['#8db600', '#5a7a32', '#8db600']}
           amplitude={0.8}
           blend={0.6}
           speed={0.5}

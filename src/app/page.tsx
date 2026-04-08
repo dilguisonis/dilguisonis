@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { ScanlineOverlay } from "@/components/ui/ScanlineOverlay";
 import { MobileNav } from "@/components/ui/MobileNav";
 import { Hero } from "@/components/sections/Hero";
@@ -7,8 +8,12 @@ import { About } from "@/components/sections/About";
 import { Experience } from "@/components/sections/Experience";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
-import { Contact } from "@/components/sections/Contact";
 import { Logo } from "@/components/ui/Logo";
+
+const Contact = dynamic(
+  () => import("@/components/sections/Contact").then(mod => ({ default: mod.Contact })),
+  { ssr: false }
+);
 
 const navLinks = [
   { href: "#hero", label: "_home" },

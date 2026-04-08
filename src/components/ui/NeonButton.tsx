@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ReactNode } from "react";
 import Magnet from "@/components/reactbits/animations/Magnet";
 
@@ -17,25 +17,25 @@ const variants = {
   cyan: {
     text: "text-neon-cyan",
     border: "border-neon-cyan/50 hover:border-neon-cyan",
-    shadow: "hover:shadow-[0_0_15px_rgba(0,255,245,0.3)]",
+    shadow: "hover:shadow-[0_0_10px_rgba(141,182,0,0.2)]",
     bg: "hover:bg-neon-cyan/10",
   },
   magenta: {
     text: "text-neon-magenta",
     border: "border-neon-magenta/50 hover:border-neon-magenta",
-    shadow: "hover:shadow-[0_0_15px_rgba(255,0,255,0.3)]",
+    shadow: "hover:shadow-[0_0_10px_rgba(90,122,50,0.2)]",
     bg: "hover:bg-neon-magenta/10",
   },
   amber: {
     text: "text-neon-amber",
     border: "border-neon-amber/50 hover:border-neon-amber",
-    shadow: "hover:shadow-[0_0_15px_rgba(255,176,0,0.3)]",
+    shadow: "hover:shadow-[0_0_10px_rgba(184,160,56,0.2)]",
     bg: "hover:bg-neon-amber/10",
   },
   green: {
     text: "text-neon-green",
     border: "border-neon-green/50 hover:border-neon-green",
-    shadow: "hover:shadow-[0_0_15px_rgba(0,255,65,0.3)]",
+    shadow: "hover:shadow-[0_0_10px_rgba(102,204,51,0.2)]",
     bg: "hover:bg-neon-green/10",
   },
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { experiences } from "@/data/experience";
 import DecryptedText from "@/components/reactbits/text/DecryptedText";
@@ -45,7 +45,7 @@ export function Experience() {
               className="relative pl-6 sm:pl-8 border-l border-text-muted/30"
             >
               {/* Year marker */}
-              <div className="absolute left-0 top-0 -translate-x-1/2 w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-neon-cyan shadow-[0_0_10px_rgba(0,255,245,0.5)]" />
+              <div className="absolute left-0 top-0 -translate-x-1/2 w-2.5 sm:w-3 h-2.5 sm:h-3 bg-neon-cyan shadow-[0_0_10px_rgba(141,182,0,0.3)]" />
 
               {/* Content */}
               <div className="terminal-box p-3 sm:p-4">
@@ -73,7 +73,7 @@ export function Experience() {
                     {exp.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 bg-bg-tertiary text-neon-cyan border border-neon-cyan/20 rounded"
+                        className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 bg-bg-tertiary text-neon-cyan border border-neon-cyan/20"
                       >
                         {tech}
                       </span>

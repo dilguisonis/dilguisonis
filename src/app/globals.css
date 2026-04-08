@@ -1,29 +1,29 @@
 /* JetBrains Mono font import */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 
 @import "tailwindcss";
 
 :root {
-  /* Core palette - Retro-futuristic terminal */
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #0f0f18;
-  --bg-tertiary: #141420;
+  /* Core palette - Old Steam UI */
+  --bg-primary: #2a3524;
+  --bg-secondary: #323f2b;
+  --bg-tertiary: #3b4a33;
 
-  --text-primary: #e0e0e0;
-  --text-secondary: #8a8a9a;
-  --text-muted: #4a4a5a;
+  --text-primary: #e2e5d8;
+  --text-secondary: #a8b094;
+  --text-muted: #6b7a5c;
 
-  /* Neon accents */
-  --neon-cyan: #00fff5;
-  --neon-magenta: #ff00ff;
-  --neon-amber: #ffb000;
-  --neon-green: #00ff41;
+  /* Accent colors - Steam UI */
+  --neon-cyan: #8db600;
+  --neon-magenta: #5a7a32;
+  --neon-amber: #b8a038;
+  --neon-green: #66cc33;
 
-  /* Glow variants (subtle) */
-  --glow-cyan: rgba(0, 255, 245, 0.15);
-  --glow-magenta: rgba(255, 0, 255, 0.15);
-  --glow-amber: rgba(255, 176, 0, 0.15);
-  --glow-green: rgba(0, 255, 65, 0.15);
+  /* Glow variants (subdued) */
+  --glow-cyan: rgba(141, 182, 0, 0.10);
+  --glow-magenta: rgba(90, 122, 50, 0.10);
+  --glow-amber: rgba(184, 160, 56, 0.10);
+  --glow-green: rgba(102, 204, 51, 0.10);
 }
 
 @theme inline {
@@ -73,7 +73,6 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: var(--text-muted);
-  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -128,37 +127,32 @@ body {
 /* Neon glow effect */
 .neon-glow-cyan {
   text-shadow:
-    0 0 5px var(--glow-cyan),
-    0 0 10px var(--glow-cyan),
-    0 0 20px var(--glow-cyan);
+    0 0 3px var(--glow-cyan),
+    0 0 8px var(--glow-cyan);
 }
 
 .neon-glow-magenta {
   text-shadow:
-    0 0 5px var(--glow-magenta),
-    0 0 10px var(--glow-magenta),
-    0 0 20px var(--glow-magenta);
+    0 0 3px var(--glow-magenta),
+    0 0 8px var(--glow-magenta);
 }
 
 .neon-glow-green {
   text-shadow:
-    0 0 5px var(--glow-green),
-    0 0 10px var(--glow-green),
-    0 0 20px var(--glow-green);
+    0 0 3px var(--glow-green),
+    0 0 8px var(--glow-green);
 }
 
 .neon-glow-amber {
   text-shadow:
-    0 0 5px var(--glow-amber),
-    0 0 10px var(--glow-amber),
-    0 0 20px var(--glow-amber);
+    0 0 3px var(--glow-amber),
+    0 0 8px var(--glow-amber);
 }
 
 /* Terminal box styles */
 .terminal-box {
   background: var(--bg-secondary);
   border: 1px solid var(--text-muted);
-  border-radius: 4px;
   position: relative;
 }
 
