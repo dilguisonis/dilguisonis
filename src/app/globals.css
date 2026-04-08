@@ -324,6 +324,16 @@ body {
   }
 }
 
+/* Taskbar attention blink */
+@keyframes taskbar-blink {
+  0%, 100% { border-color: rgba(141, 182, 0, 0.3); background: rgba(59, 74, 51, 0.5); }
+  50% { border-color: rgba(141, 182, 0, 0.7); background: rgba(141, 182, 0, 0.15); }
+}
+
+.taskbar-attention {
+  animation: taskbar-blink 1s ease-in-out infinite;
+}
+
 /* Frutiger Aero glass effect */
 .glass {
   background: linear-gradient(

@@ -4,7 +4,7 @@ import { useWindowManager } from "./WindowManager";
 import { Logo } from "@/components/ui/Logo";
 
 export function Taskbar() {
-  const { windows, focusWindow, openWindow } = useWindowManager();
+  const { windows, focusWindow, openWindow, activeWindowId } = useWindowManager();
   const openWindows = windows.filter(w => w.isOpen);
 
   return (
@@ -24,20 +24,25 @@ export function Taskbar() {
 
       {/* Open windows */}
       <div className="flex items-center gap-1 flex-1 overflow-x-auto">
-        {openWindows.map(win => (
+        {openWindows.map(win => {
+          const needsAttention = win.id === "chat" && activeWindowId !== "chat" && !win.isMinimized;
+          return (
           <button
             key={win.id}
             onClick={() => focusWindow(win.id)}
             className={`flex items-center gap-1.5 px-2 h-7 text-[11px] font-mono transition-colors border ${
               win.isMinimized
                 ? "text-text-muted bg-bg-primary border-text-muted/20"
+                : needsAttention
+                ? "taskbar-attention text-text-primary"
                 : "text-text-primary bg-bg-tertiary border-neon-cyan/30"
             } hover:border-neon-cyan/50`}
           >
             <span className="text-xs">{win.icon}</span>
             <span className="hidden sm:inline truncate max-w-[100px]">{win.title}</span>
           </button>
-        ))}
+          );
+        })}
       </div>
 
       {/* Clock / info */}
