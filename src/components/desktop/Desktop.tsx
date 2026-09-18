@@ -152,19 +152,25 @@ function MobileDesktop() {
 
 function DesktopView() {
   return (
-    <div className="h-[100dvh] flex flex-col overflow-hidden bg-bg-primary">
+    <div className="h-[100dvh] flex flex-col overflow-hidden bg-bg-primary technical-grid">
       <ScanlineOverlay />
 
       <div id="desktop-area" className="flex-1 relative overflow-hidden pb-10">
-        {/* Wallpaper */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+        {/* Wallpaper - TypeSafe AI Brutalist Grid Watermark */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none">
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.06 }}
+            animate={{ opacity: 0.12 }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="text-center"
+            className="text-center font-mono space-y-2"
           >
-            <div className="text-8xl font-bold font-mono text-neon-cyan">DI</div>
+            <div className="text-7xl sm:text-8xl font-black tracking-widest text-neon-cyan">TYPESAFE</div>
+            <div className="text-xs sm:text-sm font-bold tracking-[0.25em] text-text-secondary">
+              [ QUANTITATIVE RIG // 4x NVIDIA RTX 3090 // TERNARY-BONSAI-2-27B ]
+            </div>
+            <div className="text-[10px] text-text-muted tracking-wider">
+              LATENCY: ~14ms | STATUS: ARMED & OPERATIONAL | CS UBA
+            </div>
           </motion.div>
         </div>
 

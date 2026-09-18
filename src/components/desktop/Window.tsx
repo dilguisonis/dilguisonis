@@ -30,6 +30,13 @@ export function Window({ id, children }: WindowProps) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Sync position when WindowManager changes it (e.g. tiling)
+  useEffect(() => {
+    if (!isDragging.current) {
+      setPos({ x: win.position.x, y: win.position.y });
+    }
+  }, [win.position.x, win.position.y]);
+
   const clampPosition = useCallback((x: number, y: number) => {
     const w = win?.size.width ?? 400;
     const maxX = window.innerWidth - 80;
@@ -82,8 +89,8 @@ export function Window({ id, children }: WindowProps) {
             maxHeight: isMobile ? undefined : win.size.height,
             zIndex: win.zIndex,
           }}
-          className={`flex flex-col overflow-hidden glass ${
-            isActive ? "border-neon-cyan/30" : ""
+          className={`flex flex-col overflow-hidden glass corner-crosshair ${
+            isActive ? "border-neon-cyan/50 shadow-2xl" : "border-text-muted/20"
           }`}
         >
           {/* Title bar - drag handle */}
