@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const BONSAI_API_URL = process.env.BONSAI_API_URL || "http://127.0.0.1:8080/v1/chat/completions";
+const RIG_SECRET_KEY = process.env.RIG_SECRET_KEY || "";
 const DANILO_MASTER_KEY = process.env.DANILO_MASTER_KEY || "danilo2026";
 const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || "sk-16a9f1ad31f04cc2a29be454d1210079";
 const MODEL_NAME = "Ternary-Bonsai-2-27B";
@@ -251,7 +252,10 @@ export async function POST(req: NextRequest) {
 
       const response = await fetch(BONSAI_API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(RIG_SECRET_KEY ? { "X-Rig-Auth": RIG_SECRET_KEY } : {}),
+        },
         signal: controller.signal,
         body: JSON.stringify({
           model: MODEL_NAME,
